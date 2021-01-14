@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GeniuSpot</title>
+    <script>
+        function populateFields() {
+            chrome.storage.local.get("credentials", res => {
+                const credentials = res["credentials"];
+                
+                if (credentials != undefined) {
+                    const idField     = document.getElementById("spot_id");
+                    const secretField = document.getElementById("spot_secret");
+
+                    idField.value = credentials["client_id"];
+                    secretField.value = credentials["client_secret"];
+                }
+            });
+        }
+
+        function saveFields() {
+            const clientId     = document.getElementById("spot_id").value;
+            const clientSecret = document.getElementById("spot_secret").value;
+
+            chrome.storage.local.set({
+                "credentials": {
+                    "client_id": clientId,
+                    "client_secret": clientSecret
+                }
+            });
+        }
+    </script>
+</head>
+<body onload="populateFields()">
+    <h1>GeniuSpot</h1>
+    <p>
+        Usage: Log in and create a new Spotify application <a href="https://developer.spotify.com/dashboard" target="_blank">here</a>. You can use any name and description, and this will not cost you any extra money. Then, paste the client ID and secret key into the proper fields here and save. You will know it has worked when you can close and reopen this popup, and the text boxes below are automatically filled with the correct values.
+    </p>
+    <input type="text" id="spot_id" placeholder="Client ID" /><br />
+    <input type="password" id="spot_secret" placeholder="Client Secret" /><br />
+    <button onclick="saveFields()">Save</button>
+</body>
+</html>
