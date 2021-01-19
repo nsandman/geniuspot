@@ -17,3 +17,7 @@ Log in and create a new Spotify application [here](https://developer.spotify.com
 Then, paste the client ID and secret key into the proper fields in the extension popup and save. You will know it has worked when you can close and reopen the popup, and the text boxes are automatically filled with the correct values.
 
 Then, you can use Genius as normal! Except with a working miniplayer instead of low-quality, thirty-second previews.
+
+## Third-Party Works
+
+- [Milliard](https://www.cufonfonts.com/font/milliard)

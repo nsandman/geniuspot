@@ -1,0 +1,18 @@
+{
+  "appName": {
+    "message": "geniuspot",
+    "description": "The name of the application"
+  },
+  "appShortName": {
+    "message": "geniuspot",
+    "description": "The short_name (maximum of 12 characters recommended) is a short version of the app's name."
+  },
+  "appDescription": {
+    "message": "Use Spotify miniplayer on genius.com instead of Apple Music",
+    "description": "The description of the application"
+  },
+  "browserActionTitle": {
+    "message": "geniuspot",
+    "description": "The title of the browser action button"
+  }
+}

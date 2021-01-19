@@ -1,0 +1,53 @@
+@import "font-milliard.scss";
+
+body {
+    background: #000000;
+    color: #ffffff;
+    font-family: 'Milliard Medium', sans-serif;
+    
+    a {
+        color: #ffffff;
+    }
+}
+
+h1 {
+    color: #28D767;
+    font-family: 'Milliard Bold', sans-serif;
+}
+
+input[type=text], input[type=password] {
+    background: #3E3E3E;
+    border: 1px solid #000000;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 7px;
+    outline: none;
+    margin-top: 2px;
+    
+    &:focus {
+        background: #282828;
+        border: 1px solid #cccccc;
+    }
+}
+
+button {
+    background: #0ed855;
+    color: #ffffff;
+    font-family: 'Milliard Light', sans-serif;
+    font-size: 9pt;
+    border-radius: 30px;
+    border: 0;
+    padding: 10px 25px 8px 25px;
+    margin: 4px 0 0 3px;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+    
+    &:active {
+        background: #177e3b;
+        transform: scale(0.95);
+    }
+}
