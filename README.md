@@ -2,6 +2,11 @@
 
 Genius has an integration on their lyrics pages with Apple Music, and this extension simply replaces that with a Spotify miniplayer. It is not perfect, but it is reasonably accurate. Unfortunately, this has to use the normal Spotify search API since I don't have an Apple developer account (and this uses different keys for each user anyway).
 
+Here are the links to install it:
+
+1. [Chrome Web Store](https://chrome.google.com/webstore/detail/geniuspot/mcmfnafkklplolbfdhcgmocpmgmimpcl)
+2. [Firefox Add-Ons](https://addons.mozilla.org/addon/geniuspot/)
+
 Here is a picture of a Genius page with the extension enabled:
 
 ![screenshot with](https://i.imgur.com/22c4HZD.png)
