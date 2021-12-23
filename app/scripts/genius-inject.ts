@@ -31,7 +31,7 @@ function generateSpotifySearchSets(trackJson: {[name: string]: any}): {[name: st
 }
 
 // given an Apple Music track, will find the corresponding Spotify ID and call loadSpotifyPlayer
-function mapIdAndLoad(clientId: string, clientSecret: string, trackJson: {[name: string]: any}, playerParent: HTMLElement): void {
+function mapIdAndLoad(clientId: string, clientSecret: string, trackJson: {[name: string]: any}, playerParent: HTMLElement, newSite: boolean): void {
     // sometimes there are issues with duplicates
     let replacedAlready = false;
 
@@ -72,7 +72,7 @@ function mapIdAndLoad(clientId: string, clientSecret: string, trackJson: {[name:
                     const responseJson = JSON.parse(this.responseText);
 
                     try {
-                        loadSpotifyPlayer(playerParent, responseJson["tracks"]["items"][0]["id"]);
+                        loadSpotifyPlayer(playerParent, responseJson["tracks"]["items"][0]["id"], newSite);
                         replacedAlready = true;
                     }
                     catch (e) {
@@ -86,7 +86,7 @@ function mapIdAndLoad(clientId: string, clientSecret: string, trackJson: {[name:
 }
 
 
-function loadSpotifyPlayer(playerParent: HTMLElement, spotifyId: string): void {
+function loadSpotifyPlayer(playerParent: HTMLElement, spotifyId: string, newSite: boolean): void {
     // create the spotify embed iframe
     let frame: HTMLIFrameElement = document.createElement("iframe");
 
@@ -103,15 +103,31 @@ function loadSpotifyPlayer(playerParent: HTMLElement, spotifyId: string): void {
 
     // append and make sure our iframe is not crushed
     playerParent.appendChild(frame);
-    playerParent.style.width = "100%";
+    playerParent.style.display = "block";
+    if (newSite) {
+        playerParent.style.width = "70%";
+        playerParent.style.marginLeft = "15%";
+    }
+    else {
+        playerParent.style.width = "100%";
+    }
 }
 
 
 function swapAppleMusicPlayer(clientId: string, clientSecret: string): void {
+    let newSite: boolean = false;
+
     // this holds the iframe for the Apple Music player
-    const appleMusicParent: HTMLDivElement = document.getElementsByClassName("apple_music_player_iframe_wrapper")[0] as HTMLDivElement;
+    let appleMusicParent: HTMLDivElement = (document.getElementsByClassName("apple_music_player_iframe_wrapper")[0] as HTMLDivElement);  
+            
+    // on the new site, the container div has a different name
+    if (appleMusicParent == undefined) {
+        appleMusicParent = document.getElementsByClassName("AppleMusicPlayer__IframeWrapper-uavgzr-1")[0] as HTMLDivElement;
+        newSite = true;
+    }
     
-    // some pages do not have an Apple Music player, so they don't get Spotify
+    // some pages do not have an Apple Music player, so they don't get Spotify. if the container
+    //  is still undefined after trying both possibilities then we can assume there is no player
     if (appleMusicParent == undefined)
         return;
 
@@ -132,7 +148,7 @@ function swapAppleMusicPlayer(clientId: string, clientSecret: string): void {
                     if (previewJson != null) {
                         const trackJson: {[name: string]: any} = JSON.parse(previewJson);
 
-                        mapIdAndLoad(clientId, clientSecret, trackJson, appleMusicParent);
+                        mapIdAndLoad(clientId, clientSecret, trackJson, appleMusicParent, newSite);
                         appleMusicParent.removeChild(appleMusicIframe);
                     }
                 }

@@ -1,7 +1,7 @@
 {
   "name": "geniuspot",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Use Spotify miniplayer on genius.com instead of Apple Music",
   "scripts": {
     "start": "npm run dev:chrome",
@@ -45,11 +45,12 @@
     "gulp-less": "4.x.x",
     "gulp-livereload": "4.x.x",
     "gulp-plumber": "1.x.x",
-    "gulp-sass": "^4.x.x",
+    "gulp-sass": "^5.x.x",
     "gulp-sourcemaps": "^2.x.x",
     "gulp-tag-version": "1.x.x",
     "gulp-util": "3.x.x",
     "gulp-zip": "5.x.x",
+    "node-sass": "^7.0.0",
     "require-dir": "1.x.x",
     "standard": "14.x.x",
     "ts-loader": "^6.x.x",
