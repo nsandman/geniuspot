@@ -1,9 +1,21 @@
 @import "font-milliard.scss";
 
+$body_margin: 30px;
 body {
     background: #000000;
     color: #ffffff;
     font-family: 'Milliard Medium', sans-serif;
+    margin: 0 $body_margin 17px 45px;
+    
+    #container {
+        width: 350px;
+        margin: auto;
+    }
+
+    center {
+        display: block;
+        width: 90%;
+    }
     
     a {
         color: #ffffff;
@@ -15,6 +27,28 @@ h1 {
     font-family: 'Milliard Bold', sans-serif;
 }
 
+h1, h2, h4 {
+    display: block;
+    text-align: center;
+}
+
+ol {
+    margin: 0;
+    padding: 0;
+    li {
+        margin-top: 8px;
+    }
+}
+    
+.text-light {
+    font-family: 'Milliard Light', sans-serif;
+}
+
+.text-small {
+    font-style: italic;
+    margin-top: 2px;
+}
+
 input[type=text], input[type=password] {
     background: #3E3E3E;
     border: 1px solid #000000;
@@ -23,6 +57,7 @@ input[type=text], input[type=password] {
     padding: 7px;
     outline: none;
     margin-top: 2px;
+    width: 100%;
     
     &:focus {
         background: #282828;
@@ -50,4 +85,12 @@ button {
         background: #177e3b;
         transform: scale(0.95);
     }
+}
+
+#spot_secret {
+    margin-bottom: 3px;
+}
+
+p {
+    text-align: justify;
 }

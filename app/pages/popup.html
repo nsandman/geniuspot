@@ -6,12 +6,37 @@
     <link rel="stylesheet" type="text/css" href="../styles/popup.css" />
 </head>
 <body>
-    <h1>GeniuSpot</h1>
-    <p>
-        Usage: Log in and create a new Spotify application <a href="https://developer.spotify.com/dashboard" target="_blank">here</a>. You can use any name and description, and this will not cost you any extra money. Then, paste the client ID and secret key into the proper fields here and save. You will know it has worked when you can close and reopen this popup, and the text boxes below are automatically filled with the correct values.
-    </p>
-    <input type="text" id="spot_id" spellcheck="false" placeholder="Client ID" /><br />
-    <input type="password" id="spot_secret" spellcheck="false" placeholder="Client Secret" /><br />
-    <button id="save">SAVE</button>
+    <div id="container">
+        <h1 style="margin-bottom: -15px;">GeniuSpot</h1>
+        <h4>by <a href="https://github.com/nsandman" target="_blank">Noah Sandman</a></h4>
+        <p class="text-light">
+            Thank you for using GeniuSpot! Please make sure the following steps are complete for the extension to work:
+        </p>
+        <p>
+            <h2>How to Set Up</h2>
+            <ol>
+                <li>Log in <a href="https://developer.spotify.com/dashboard" target="_blank">here</a> on spotify.com.</li>
+                <li>Press "Create an App," and fill in "Name" and "Description" with whatever you'd like.<br/>
+                    <p class="text-light text-small">
+                        If you're unsure, I recommend something like "GeniuSpot Extension" for both, or anything else that will help you remember the reason why you created it. This process will not cost you any money.
+                    </p>
+                </li>
+                <li>Agree to Spotify's terms and press "Create".</li>
+                <li>Copy and paste your "Client ID" and "Client Secret" into the fields below, and press save.</li>
+                    <p class="text-light text-small">
+                        Both the ID and secret should be strings of 32 random letters and numbers. These values are never stored anywhere other than your computer, and are only used to access Spotify search. You are not granting this extension any other access to your account.
+                    </p>
+                <li>Close and reopen this prompt.</li>
+                    <p class="text-light text-small">
+                        If both boxes are still filled in, your credentials have been successfully saved! That means you should be able to use GeniuSpot with no issues.
+                    </p>
+            </ol>
+        </p>
+        <center>
+            <input type="text" id="spot_id" spellcheck="false" placeholder="Client ID" /><br />
+            <input type="password" id="spot_secret" spellcheck="false" placeholder="Client Secret" /><br />
+            <button id="save">SAVE</button>
+        </center>
+    </div>
 </body>
 </html>

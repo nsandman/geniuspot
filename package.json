@@ -1,7 +1,7 @@
 {
   "name": "geniuspot",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Use Spotify miniplayer on genius.com instead of Apple Music",
   "scripts": {
     "start": "npm run dev:chrome",

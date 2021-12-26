@@ -73,3 +73,13 @@ function messageListener(chromeRequest: {[name: string]: any}, _sender: any, sen
   }
 }
 chrome.runtime.onMessage.addListener(messageListener);
+
+// show setup page on install
+chrome.runtime.onInstalled.addListener(function() {
+    chrome.tabs.create({
+      url: chrome.extension.getURL("pages/popup.html"),
+      active: true
+    });
+
+    return false;
+});

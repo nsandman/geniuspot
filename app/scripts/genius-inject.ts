@@ -147,6 +147,7 @@ function swapAppleMusicPlayer(clientId: string, clientSecret: string): void {
                     const previewJson: string | null = appleMusicPlayer.getAttribute("preview_track");
                     if (previewJson != null) {
                         const trackJson: {[name: string]: any} = JSON.parse(previewJson);
+                        console.dir(trackJson);
 
                         mapIdAndLoad(clientId, clientSecret, trackJson, appleMusicParent, newSite);
                         appleMusicParent.removeChild(appleMusicIframe);
