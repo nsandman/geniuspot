@@ -1,5 +1,5 @@
 // Noah Sandman
-// key-manager.ts
+// background.ts
 // Created 13 Jan 2021
 // GeniuSpot
 
@@ -20,23 +20,25 @@ function getEpochTimeSeconds(): number {
 
 // get a new access token from spotify with our credentials
 function fetchSpotifyToken(clientId: string, clientSecret: string, callback: (response: object) => void) : void {
-  const req = new XMLHttpRequest();
-  req.open("POST", `https://accounts.spotify.com/api/token`);
-  req.setRequestHeader("Authorization", `Basic ${genAuthBasicToken(clientId, clientSecret)}`);
-  req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  req.send("grant_type=client_credentials"); 
-  
-  req.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-          const response = JSON.parse(this.responseText);
-          response["saved_at"] = getEpochTimeSeconds();
-          
-          chrome.storage.local.set({
-              "token": response
-          }, 
-          () => callback(response));
-      }
-  };
+    fetch("https://accounts.spotify.com/api/token", {
+        method: "POST",
+        headers: {
+            "Authorization": `Basic ${genAuthBasicToken(clientId, clientSecret)}`,
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "grant_type=client_credentials"
+    })
+    .then(resObj => resObj.json())
+    .then(response => {
+        response["saved_at"] = getEpochTimeSeconds();
+        chrome.storage.local.set({
+            "token": response
+        }, 
+        () => callback(response));
+    })
+    .catch(err => {
+        console.error(err);
+    });
 }
 
 
@@ -74,10 +76,11 @@ function messageListener(chromeRequest: {[name: string]: any}, _sender: any, sen
 }
 chrome.runtime.onMessage.addListener(messageListener);
 
+
 // show setup page on install
 chrome.runtime.onInstalled.addListener(function() {
     chrome.tabs.create({
-      url: chrome.extension.getURL("pages/popup.html"),
+      url: chrome.runtime.getURL("pages/popup.html"),
       active: true
     });
 

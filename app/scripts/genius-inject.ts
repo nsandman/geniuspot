@@ -49,8 +49,6 @@ function mapIdAndLoad(clientId: string, clientSecret: string, trackJson: {[name:
                 "type": "track"
             };
 
-            const req = new XMLHttpRequest();
-            req.open("GET", `https://api.spotify.com/v1/search?${formatGetParams(params)}`);
             chrome.runtime.sendMessage(
                 {
                     message: "getSpotifyToken",
@@ -59,28 +57,26 @@ function mapIdAndLoad(clientId: string, clientSecret: string, trackJson: {[name:
                 }, 
                 token => {
                     if (!replacedAlready) {
-                        req.setRequestHeader("Authorization", `${token["token_type"]} ${token["access_token"]}`);
-                        req.send();
-    
-                        console.debug(params["q"]);
+                        fetch(`https://api.spotify.com/v1/search?${formatGetParams(params)}`, {
+                            method: "GET",
+                            headers: {
+                                "Authorization": `${token["token_type"]} ${token["access_token"]}`
+                            }
+                        })
+                        .then(resObj => resObj.json())
+                        .then(response => {
+                            try {
+                                loadSpotifyPlayer(playerParent, response["tracks"]["items"][0]["id"], newSite);
+                                replacedAlready = true;
+                            }
+                            catch (e) {
+                                console.log("No tracks in Spotify response, received:");
+                                console.dir(response);
+                            }
+                        });
                     }
                 }
             );
-
-            req.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200 && !replacedAlready) {
-                    const responseJson = JSON.parse(this.responseText);
-
-                    try {
-                        loadSpotifyPlayer(playerParent, responseJson["tracks"]["items"][0]["id"], newSite);
-                        replacedAlready = true;
-                    }
-                    catch (e) {
-                        console.log("No tracks in Spotify response, received:");
-                        console.log(this.responseText);
-                    }
-                }
-            };
         }
     }
 }
@@ -147,7 +143,6 @@ function swapAppleMusicPlayer(clientId: string, clientSecret: string): void {
                     const previewJson: string | null = appleMusicPlayer.getAttribute("preview_track");
                     if (previewJson != null) {
                         const trackJson: {[name: string]: any} = JSON.parse(previewJson);
-                        console.dir(trackJson);
 
                         mapIdAndLoad(clientId, clientSecret, trackJson, appleMusicParent, newSite);
                         appleMusicParent.removeChild(appleMusicIframe);
