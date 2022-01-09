@@ -34,7 +34,18 @@ function saveFields(): void {
     }
 }
 
+function hideNote(id: string): void {
+    const urlParams = new URLSearchParams(window.location.search);
+    let idValue: string|null = urlParams.get(id);
+
+    if (idValue != "1") {
+        const note: HTMLElement = document.getElementById(id) as HTMLElement;
+        note.style.display = "none";
+    }
+}
+
 window.onload = function() {
+    hideNote("note");
     populateFields();
 
     const saveButton: HTMLButtonElement = document.getElementById("save") as HTMLButtonElement;

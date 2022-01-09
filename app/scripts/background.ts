@@ -80,7 +80,7 @@ chrome.runtime.onMessage.addListener(messageListener);
 // show setup page on install
 chrome.runtime.onInstalled.addListener(function() {
     chrome.tabs.create({
-      url: chrome.runtime.getURL("pages/popup.html"),
+      url: chrome.runtime.getURL("pages/popup.html?note=1"),
       active: true
     });
 
